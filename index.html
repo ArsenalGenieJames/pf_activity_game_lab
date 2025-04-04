@@ -3,11 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pinoy Surfing</title>
+    <title>Pinoy Racing Game</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+            background: url(eric\ cartman\ kyle\ GIF\ by\ South\ Park.gif) no-repeat center center fixed;
+            background-size: cover;
+        }
+        #gameCanvas {
+            border: 1px solid black;
+            height: 100vh;
+            width: 100vw;
+        }
+    </style>
 </head>
 <body>
-    
-    
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const image = new Image();
+        image.src = 'image_1.png'; // Replace with your image URL
+
+        let x = canvas.width / 2 - 25; // Initial x position
+        let y = canvas.height / 2 - 25; // Initial y position
+        const speed = 10;
+        const imageWidth = 200;
+        const imageHeight = 400;
+
+        image.onload = () => {
+            draw();
+        };
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(image, x, y, imageWidth, imageHeight);
+        }
+
+        function moveRight() {
+            if (x + imageWidth + speed <= canvas.width) {
+                x += speed; // Move right
+            }
+            draw();
+        }
+
+        function moveLeft() {
+            if (x - speed >= 0) {
+                x -= speed; // Move left
+            }
+            draw();
+        }
+
+        function moveUp() {
+            if (y - speed >= 0) {
+                y -= speed; // Move up
+            }
+            draw();
+        }
+
+        function moveDown() {
+            if (y + imageHeight + speed <= canvas.height) {
+                y += speed; // Move down
+            }
+            draw();
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowRight') {
+                moveRight();
+            } else if (event.key === 'ArrowLeft') {
+                moveLeft();
+            } else if (event.key === 'ArrowUp') {
+                moveUp();
+            } else if (event.key === 'ArrowDown') {
+                moveDown();
+            }
+        });
+    </script>
 </body>
-<script src="script.js"></script>
 </html>
